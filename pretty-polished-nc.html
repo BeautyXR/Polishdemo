@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pretty & Polished NC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blush: #f2d4d4;
+    --rose: #c9777e;
+    --deep-rose: #a85560;
+    --cream: #fdf7f4;
+    --warm-white: #fffaf9;
+    --brown: #2e1f1f;
+    --muted: #8a6b6b;
+    --light-pink: #fce8e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--brown);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(255,250,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,119,126,0.12);
+    transition: all 0.3s ease;
+  }
+
+  nav h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  nav div {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  nav div a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: var(--brown);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  nav div a:hover { opacity: 1; }
+
+  nav .book-nav {
+    margin-left: 16px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: var(--rose);
+    color: white !important;
+    opacity: 1 !important;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Hide Work/Pricing/Book text links on small screens, keep Reserve button */
+  @media (max-width: 520px) {
+    nav { padding: 14px 20px; }
+    nav h1 { font-size: 17px; }
+    nav .hide-mobile { display: none; }
+    nav .book-nav { margin-left: 0; }
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #fce8e8 0%, var(--warm-white) 70%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,212,212,0.4) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,119,126,0.12) 0%, transparent 70%);
+    bottom: 0; right: -80px;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 300;
+    line-height: 1.25;
+    max-width: 700px;
+    letter-spacing: 0.01em;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero h2 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero p {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 420px;
+    line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .badge {
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    color: var(--deep-rose);
+    background: rgba(201,119,126,0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,119,126,0.2);
+  }
+
+  .hero-cta {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .btn-primary {
+    padding: 15px 34px;
+    border-radius: 40px;
+    border: none;
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(168,85,96,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(168,85,96,0.4);
+  }
+
+  .btn-outline {
+    padding: 14px 32px;
+    border-radius: 40px;
+    border: 1px solid rgba(46,31,31,0.2);
+    background: transparent;
+    color: var(--brown);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: rgba(46,31,31,0.04); border-color: rgba(46,31,31,0.4); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 100px 60px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose);
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto 60px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery-category {
+    margin-bottom: 60px;
+  }
+
+  .category-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 16px;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    aspect-ratio: 3/4;
+    background: var(--blush);
+  }
+
+  .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .grid-item:hover img { transform: scale(1.04); }
+
+  .gallery-center {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-section {
+    background: linear-gradient(180deg, var(--cream) 0%, #fce8e8 60%, var(--cream) 100%);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 30px rgba(46,31,31,0.06);
+    border: 1px solid rgba(201,119,126,0.1);
+  }
+
+  .price-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,119,126,0.15);
+    letter-spacing: 0.03em;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+
+  .price-name { font-size: 14px; font-weight: 400; }
+  .price-desc { font-size: 12px; color: var(--muted); margin-top: 2px; font-weight: 300; }
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--rose);
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  .price-card.featured {
+    background: linear-gradient(135deg, #2e1f1f, #4a2f2f);
+    color: white;
+    border-color: transparent;
+  }
+
+  .price-card.featured h3 { color: var(--blush); border-color: rgba(255,255,255,0.1); }
+  .price-card.featured .price-desc { color: rgba(255,255,255,0.5); }
+  .price-card.featured .price-amount { color: #f2b8b8; }
+
+  .testimonial-card {
+    grid-column: span 2;
+    background: var(--rose);
+    color: white;
+    border-radius: 20px;
+    padding: 36px;
+    text-align: center;
+  }
+
+  .testimonial-card blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .testimonial-card cite {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  /* ─── BOOKING ─── */
+  .booking-section {
+    background: var(--warm-white);
+  }
+
+  .booking-wrapper {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* Steps indicator */
+  .steps-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 48px;
+  }
+
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(201,119,126,0.1);
+    color: var(--muted);
+    border: 1.5px solid transparent;
+    cursor: default;
+  }
+
+  .step-dot.active {
+    background: var(--rose);
+    color: white;
+    box-shadow: 0 4px 16px rgba(201,119,126,0.4);
+  }
+
+  .step-dot.done {
+    background: #e8f5e9;
+    color: #4caf50;
+    border-color: #c8e6c9;
+  }
+
+  .step-line {
+    width: 48px; height: 1px;
+    background: rgba(201,119,126,0.2);
+  }
+
+  .step-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 8px;
+    color: var(--muted);
+  }
+
+  .steps-labels {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+
+  .step-label-item {
+    width: 80px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Booking form steps */
+  .booking-step {
+    display: none;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .booking-step.active { display: block; }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid rgba(46,31,31,0.1);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: white;
+    color: var(--brown);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-control:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(201,119,126,0.1);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .service-card {
+    border: 1.5px solid rgba(46,31,31,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .service-card:hover { border-color: var(--rose); }
+
+  .service-card.selected {
+    border-color: var(--rose);
+    background: rgba(201,119,126,0.05);
+  }
+
+  .service-card input { display: none; }
+
+  .service-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .service-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--rose); }
+  .service-desc { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 300; }
+
+  .art-tier-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .tier-btn {
+    border: 1.5px solid rgba(46,31,31,0.1);
+    border-radius: 10px;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tier-btn:hover { border-color: var(--rose); }
+  .tier-btn.selected { border-color: var(--rose); background: rgba(201,119,126,0.05); }
+
+  .tier-name { font-size: 13px; font-weight: 500; display: block; }
+  .tier-price { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--rose); display: block; margin-top: 2px; }
+  .tier-desc { font-size: 10px; color: var(--muted); display: block; margin-top: 3px; }
+
+  /* Step 3: Deposit */
+  .deposit-box {
+    background: linear-gradient(135deg, #2e1f1f, #4a2f2f);
+    border-radius: 20px;
+    padding: 36px;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .deposit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+
+  .deposit-subtitle {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+
+  .deposit-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: #f2b8b8;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .deposit-amount-note {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 28px;
+  }
+
+  .payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .payment-method {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .payment-method:hover, .payment-method.selected {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(242,184,184,0.5);
+  }
+
+  .payment-method-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .payment-method-handle { font-size: 11px; opacity: 0.6; }
+
+  .deposit-notice {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 12px;
+    opacity: 0.75;
+    line-height: 1.6;
+    border-left: 2px solid rgba(242,184,184,0.4);
+  }
+
+  .confirm-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .confirm-checkbox-label input {
+    margin-top: 2px;
+    accent-color: var(--rose);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Booking summary bar */
+  .summary-bar {
+    background: white;
+    border: 1.5px solid rgba(201,119,126,0.15);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    display: none;
+  }
+
+  .summary-bar.visible { display: block; }
+
+  .summary-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+  .summary-items {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .summary-item { font-size: 13px; }
+  .summary-item span { color: var(--rose); font-weight: 500; }
+
+  .summary-total {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(201,119,126,0.1);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .summary-total strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--rose);
+  }
+
+  /* Navigation buttons */
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    gap: 12px;
+  }
+
+  .btn-back {
+    padding: 13px 24px;
+    border-radius: 30px;
+    border: 1.5px solid rgba(46,31,31,0.15);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover { border-color: var(--brown); color: var(--brown); }
+
+  .btn-next {
+    flex: 1;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(168,85,96,0.28);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(168,85,96,0.38); }
+
+  /* Confirmation */
+  .confirmation {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .confirmation.active { display: block; animation: fadeUp 0.6s ease forwards; }
+
+  .confirm-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    margin: 0 auto 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+
+  .confirm-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+
+  .confirm-subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 400px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .confirm-detail-card {
+    background: white;
+    border: 1.5px solid rgba(201,119,126,0.15);
+    border-radius: 18px;
+    padding: 28px;
+    max-width: 420px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+
+  .confirm-detail-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .confirm-detail-value {
+    font-size: 15px;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .confirm-detail-value:last-child { margin-bottom: 0; }
+
+  .confirm-email-note {
+    background: rgba(201,119,126,0.06);
+    border: 1px solid rgba(201,119,126,0.15);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .confirm-email-note strong { color: var(--rose); }
+
+  /* ─── POLICIES ─── */
+  .policy-section { background: var(--cream); }
+
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .policy-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(201,119,126,0.1);
+  }
+
+  .policy-icon { font-size: 20px; margin-bottom: 10px; }
+  .policy-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.02em; }
+  .policy-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  .policy-card.important {
+    background: linear-gradient(135deg, #fce8e8, #fdf2f2);
+    border-color: rgba(201,119,126,0.2);
+  }
+
+  .policy-card.important p { color: var(--deep-rose); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--brown);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: white; }
+
+  footer p {
+    margin-top: 16px;
+    font-size: 11px;
+    opacity: 0.4;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav h1 { font-size: 17px; }
+    nav div a { margin-left: 14px; font-size: 12px; }
+    nav .book-nav { display: none; }
+    .section { padding: 70px 24px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .testimonial-card { grid-column: span 1; }
+    .form-row, .service-grid, .payment-options { grid-template-columns: 1fr; }
+    .art-tier-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    nav div a[href="#work"], nav div a[href="#pricing"] { display: none; }
+    nav div a[href="#booking"]:not(.book-nav) {
+      margin-left: 0;
+      padding: 9px 20px;
+      border-radius: 30px;
+      background: var(--rose);
+      color: white !important;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <h1>Pretty & Polished NC</h1>
+  <div>
+    <a href="#work" class="hide-mobile">Work</a>
+    <a href="#pricing" class="hide-mobile">Pricing</a>
+    <a href="#booking" class="hide-mobile">Book</a>
+    <a href="#booking" class="book-nav">Reserve</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Charlotte-Based Nail Artist</div>
+  <h2>Soft, feminine nails that feel as <em>beautiful</em> as they look.</h2>
+  <p>Romantic, delicate nail art designed to feel effortless, look luxurious, and last weeks.</p>
+  <div class="hero-badges">
+    <span class="badge">⚡ Almost fully booked this week</span>
+    <span class="badge">✦ Gel-X · Builder Gel · Freestyle</span>
+    <span class="badge">3+ Week Hold</span>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Reserve Your Spot</button>
+    <a href="#work" class="btn-outline">See Work</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="work">
+  <span class="section-label">Portfolio</span>
+  <h2 class="section-title">Signature Work</h2>
+  <p class="section-sub">Every set is made with intention — designed to complement you, not just your nails.</p>
+
+  <div class="gallery-category">
+    <div class="category-label">French Tips & Minimal</div>
+    <div class="grid">
+      <div class="grid-item"><img src="image1.jpg" alt="French tip nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#fce8e8,#f5c8c8)'"></div>
+      <div class="grid-item"><img src="image2.jpg" alt="Minimal nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#f9dada,#f2c4c4)'"></div>
+      <div class="grid-item"><img src="image3.jpg" alt="Clean nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#fde8e8,#fac8c8)'"></div>
+    </div>
+  </div>
+
+  <div class="gallery-category">
+    <div class="category-label">3D Floral Sets</div>
+    <div class="grid">
+      <div class="grid-item"><img src="image4.jpg" alt="3D floral nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#faeae8,#f0c4b8)'"></div>
+      <div class="grid-item"><img src="image5.jpg" alt="Floral set" onerror="this.parentElement.style.background='linear-gradient(135deg,#f9e4e0,#f0b8b0)'"></div>
+    </div>
+  </div>
+
+  <div class="gallery-category">
+    <div class="category-label">Chrome, Gold & Luxe</div>
+    <div class="grid">
+      <div class="grid-item"><img src="image6.jpg" alt="Chrome nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#f5e8d8,#e8c89c)'"></div>
+      <div class="grid-item"><img src="image7.jpg" alt="Gold nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#f2e4cc,#e0c088)'"></div>
+    </div>
+  </div>
+
+  <div class="gallery-category">
+    <div class="category-label">Freestyle & Statement</div>
+    <div class="grid">
+      <div class="grid-item"><img src="image8.jpg" alt="Freestyle nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#ece8f4,#c8b8e8)'"></div>
+      <div class="grid-item"><img src="image9.jpg" alt="Statement nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#e8eef8,#b8c8e8)'"></div>
+      <div class="grid-item"><img src="image10.jpg" alt="Custom nails" onerror="this.parentElement.style.background='linear-gradient(135deg,#e8f4ec,#b8d8c4)'"></div>
+    </div>
+  </div>
+
+  <div class="gallery-center">
+    <a href="https://www.instagram.com/prettyandpolishednc" target="_blank" class="btn-outline">View Full Gallery on Instagram →</a>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <span class="section-label">Investment</span>
+  <h2 class="section-title">Services & Pricing</h2>
+  <p class="section-sub">All sets include cuticle prep and your choice of shape and length. Art pricing is added to base service.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>Base Services</h3>
+      <div class="price-row">
+        <div><div class="price-name">Gel-X Full Set</div><div class="price-desc">Any length & shape + base color</div></div>
+        <div class="price-amount">$40</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Builder Gel</div><div class="price-desc">Structured, natural feel</div></div>
+        <div class="price-amount">$35</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Gel Manicure</div><div class="price-desc">Clean + detailed finish</div></div>
+        <div class="price-amount">$30</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Freestyle</div><div class="price-desc">Custom designed for you</div></div>
+        <div class="price-amount">$50</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Soak Off</div><div class="price-desc"></div></div>
+        <div class="price-amount">$10</div>
+      </div>
+    </div>
+
+    <div class="price-card featured">
+      <h3>Art Tiers</h3>
+      <div class="price-row">
+        <div><div class="price-name">Tier 1</div><div class="price-desc">Simple linework, dots, prints</div></div>
+        <div class="price-amount">+$10</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Tier 2</div><div class="price-desc">French, gradients, minimal art</div></div>
+        <div class="price-amount">+$25</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Tier 3</div><div class="price-desc">Intricate, layered & 3D designs</div></div>
+        <div class="price-amount">+$35</div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Builder Gel Art</div><div class="price-desc"></div></div>
+        <div class="price-amount">+$15</div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <blockquote>"My nails lasted 3+ weeks and still looked perfect. The attention to detail is unreal."</blockquote>
+      <cite>— Verified Client Review</cite>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section booking-section" id="booking">
+  <span class="section-label">Reservations</span>
+  <h2 class="section-title">Book Your Appointment</h2>
+  <p class="section-sub">Spots are limited each week. A $15 deposit is required to secure your booking and is applied toward your total.</p>
+
+  <div class="booking-wrapper">
+
+    <!-- Step indicators -->
+    <div class="steps-indicator" id="stepsIndicator">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="dot3">3</div>
+    </div>
+    <div class="steps-labels">
+      <div class="step-label-item">Your Info</div>
+      <div style="width:48px;flex-shrink:0"></div>
+      <div class="step-label-item">Service & Date</div>
+      <div style="width:48px;flex-shrink:0"></div>
+      <div class="step-label-item">Deposit</div>
+    </div>
+
+    <!-- Summary bar (visible from step 2 onward) -->
+    <div class="summary-bar" id="summaryBar">
+      <div class="summary-title">Your Booking Summary</div>
+      <div class="summary-items" id="summaryItems"></div>
+      <div class="summary-total">
+        <span>Estimated Total</span>
+        <strong id="summaryTotal">—</strong>
+      </div>
+    </div>
+
+    <!-- STEP 1: Personal Info -->
+    <div class="booking-step active" id="step1">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" placeholder="jane@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="phone" placeholder="(555) 000-0000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Instagram Handle <span style="opacity:0.5;font-size:10px;">(optional — helpful for inspo pics)</span></label>
+        <input type="text" class="form-control" id="instagram" placeholder="@yourhandle">
+      </div>
+      <div class="form-nav">
+        <button class="btn-next" onclick="goToStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Service & Date -->
+    <div class="booking-step" id="step2">
+      <div class="form-group">
+        <label class="form-label">Select Service</label>
+        <div class="service-grid" id="serviceGrid">
+          <label class="service-card" onclick="selectService(this,'Gel-X Full Set',40)">
+            <input type="radio" name="service">
+            <div class="service-name">Gel-X Full Set</div>
+            <div class="service-price">$40</div>
+            <div class="service-desc">Any length & shape + base color</div>
+          </label>
+          <label class="service-card" onclick="selectService(this,'Builder Gel',35)">
+            <input type="radio" name="service">
+            <div class="service-name">Builder Gel</div>
+            <div class="service-price">$35</div>
+            <div class="service-desc">Structured, natural feel</div>
+          </label>
+          <label class="service-card" onclick="selectService(this,'Gel Manicure',30)">
+            <input type="radio" name="service">
+            <div class="service-name">Gel Manicure</div>
+            <div class="service-price">$30</div>
+            <div class="service-desc">Clean + detailed finish</div>
+          </label>
+          <label class="service-card" onclick="selectService(this,'Freestyle',50)">
+            <input type="radio" name="service">
+            <div class="service-name">Freestyle</div>
+            <div class="service-price">$50</div>
+            <div class="service-desc">Custom designed for you</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Art Tier <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
+        <div class="art-tier-grid">
+          <button type="button" class="tier-btn" onclick="selectTier(this,'None',0)">
+            <span class="tier-name">None</span>
+            <span class="tier-price">—</span>
+            <span class="tier-desc">Base color only</span>
+          </button>
+          <button type="button" class="tier-btn" onclick="selectTier(this,'Tier 1',10)">
+            <span class="tier-name">Tier 1</span>
+            <span class="tier-price">+$10</span>
+            <span class="tier-desc">Dots, linework</span>
+          </button>
+          <button type="button" class="tier-btn" onclick="selectTier(this,'Tier 2',25)">
+            <span class="tier-name">Tier 2</span>
+            <span class="tier-price">+$25</span>
+            <span class="tier-desc">French, gradients</span>
+          </button>
+          <button type="button" class="tier-btn" onclick="selectTier(this,'Tier 3',35)">
+            <span class="tier-name">Tier 3</span>
+            <span class="tier-price">+$35</span>
+            <span class="tier-desc">3D & intricate</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Preferred Date</label>
+          <input type="date" class="form-control" id="apptDate" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Time</label>
+          <select class="form-control" id="apptTime">
+            <option value="">Select a time</option>
+            <option>9:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>1:00 PM</option>
+            <option>2:00 PM</option>
+            <option>3:00 PM</option>
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Inspo or Notes <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
+        <textarea class="form-control" id="notes" rows="3" placeholder="Describe your ideal set, or paste an inspo link..." style="resize:vertical; font-family:'DM Sans',sans-serif;"></textarea>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="goToStep(1)">← Back</button>
+        <button class="btn-next" onclick="goToStep(3)">Continue to Deposit →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Deposit -->
+    <div class="booking-step" id="step3">
+      <div class="deposit-box">
+        <div class="deposit-subtitle">Non-Refundable Booking Deposit</div>
+        <div class="deposit-title">Secure Your Spot</div>
+        <div class="deposit-amount">$15</div>
+        <div class="deposit-amount-note">Applied toward your total at appointment</div>
+
+        <div style="font-size:12px; opacity:0.7; margin-bottom:12px; letter-spacing:0.06em; text-transform:uppercase;">Send via</div>
+        <div class="payment-options">
+          <div class="payment-method selected" onclick="selectPayment(this)">
+            <div class="payment-method-name">💚 Zelle</div>
+            <div class="payment-method-handle">@prettyandpolishednc</div>
+          </div>
+          <div class="payment-method" onclick="selectPayment(this)">
+            <div class="payment-method-name">💳 Cash App</div>
+            <div class="payment-method-handle">$prettypolishednc</div>
+          </div>
+        </div>
+
+        <div class="deposit-notice">
+          ⚠️ Your appointment time is <strong style="color:#f2b8b8;">not confirmed</strong> until your deposit is received. After sending, check the box below and submit — you'll receive a confirmation email within 24 hours once your payment is verified and your time slot is confirmed.
+        </div>
+      </div>
+
+      <label class="confirm-checkbox-label" id="depositCheckLabel">
+        <input type="checkbox" id="depositConfirm">
+        I confirm I have sent the $15 deposit via Zelle or Cash App. I understand this deposit is <strong style="color:var(--rose);">non-refundable</strong> — it will not be returned for no-shows, same-day cancellations, or if I arrive more than 15 minutes late.
+      </label>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="goToStep(2)">← Back</button>
+        <button class="btn-next" onclick="submitBooking()">Confirm Booking →</button>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirmation" id="confirmation">
+      <div class="confirm-icon">✓</div>
+      <div class="confirm-title">You're almost confirmed!</div>
+      <div class="confirm-subtitle">Your request has been received. A confirmation email will be sent to <strong id="confirmEmail" style="color:var(--rose);"></strong> within 24 hours once your deposit is verified and your time slot is confirmed.</div>
+
+      <div class="confirm-detail-card" id="confirmCard">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="confirm-email-note">
+        📩 <strong>What happens next:</strong> Once we verify your $15 deposit, we'll send you a confirmation email with your exact appointment details, what to bring, and how to prepare. If your requested time isn't available, we'll reach out to find an alternative. Questions? DM <strong>@prettyandpolishednc</strong> on Instagram.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section class="section policy-section">
+  <span class="section-label">Important</span>
+  <h2 class="section-title">Policies</h2>
+  <p class="section-sub">Please read before booking. These policies exist to protect your experience and mine.</p>
+
+  <div class="policy-grid">
+    <div class="policy-card important">
+      <div class="policy-icon">💳</div>
+      <h3>Deposit Policy</h3>
+      <p>A $15 non-refundable deposit is required to secure every appointment. This deposit is applied to your total but <strong>will not be returned</strong> under any circumstances — including no-shows, same-day cancellations, or late arrivals over 15 minutes.</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-icon">🕐</div>
+      <h3>Late Policy</h3>
+      <p>5–10 minutes late incurs a $5 fee. Arriving 15+ minutes late will result in a cancellation and your deposit is forfeited.</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-icon">💅</div>
+      <h3>Nail Bed Safety</h3>
+      <p>No service over foreign products, extremely thin nails, or active infections. Your nail health comes first.</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-icon">🚫</div>
+      <h3>No Extra Guests</h3>
+      <p>No additional guests allowed during your appointment. Please reschedule if you are feeling unwell.</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-icon">✨</div>
+      <h3>Nail Etiquette</h3>
+      <p>Please arrive with clean, bare nails. Arriving with product on your nails may reduce service time or require an additional soak-off fee.</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-icon">💵</div>
+      <h3>Payment Methods</h3>
+      <p>Zelle, Cash App, or exact cash only. No exceptions. Remaining balance is due at time of service.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: var(--warm-white);">
+  <span class="section-label">Got Questions</span>
+  <h2 class="section-title">Frequently Asked</h2>
+  <p class="section-sub">Everything you need to know before booking.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I know my appointment is confirmed? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Once you submit your booking request and send the $15 deposit, you'll receive a confirmation email within 24 hours once the deposit is verified. Your slot is <strong>not confirmed</strong> until that email comes through — so please don't assume you're booked until then.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What if my requested time isn't available? <span class="faq-icon">+</span></button>
+      <div class="faq-a">If your requested date or time isn't open, you'll be contacted via email to find an alternative. Your deposit will transfer to the new date — it won't be lost just because of availability.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I cancel or reschedule? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Rescheduling is allowed with at least <strong>48 hours notice</strong> and your deposit will transfer. Cancellations within 48 hours or same-day forfeit the deposit. No-shows forfeit the deposit and may require a larger deposit for future bookings.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is the deposit applied to my total? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Yes — your $15 deposit counts toward your service total. If your set comes to $65, you'll only owe $50 at the appointment. It's not an extra charge, just a way to secure your spot.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What should I do to prepare? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Arrive with <strong>clean, bare nails</strong> — no old product or polish. If you have a set on, a soak-off can be added for $10. Come with your inspo pics ready if you have them — it saves time and makes the whole process smoother.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does a set take? <span class="faq-icon">+</span></button>
+      <div class="faq-a">A simple Gel Manicure takes roughly 45–60 minutes. A full Gel-X or Builder Gel set with Tier 2–3 art can take 1.5–2.5 hours. Please don't book if you're in a rush.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long will my nails last? <span class="faq-icon">+</span></button>
+      <div class="faq-a">With proper care, Gel-X and Builder Gel sets typically last <strong>3–5 weeks</strong>. Use cuticle oil daily, avoid picking, and don't use your nails as tools. The better you treat them, the longer they hold.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What payment methods are accepted? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Remaining balance at your appointment is accepted via <strong>Zelle, Cash App, or exact cash only</strong>. No cards, no Venmo, no partial payments. Please come prepared.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I bring a guest or my child? <span class="faq-icon">+</span></button>
+      <div class="faq-a">No additional guests are allowed during appointments. Please make arrangements before arriving.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you work on damaged or previously done nails? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Services will not be performed over another tech's existing work, extremely thin or damaged nail beds, or active infections. If you're unsure whether your nails qualify, email before booking to save yourself the trip.</div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .faq-list { max-width: 680px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid rgba(201,119,126,0.15); }
+  .faq-q {
+    width: 100%; background: none; border: none;
+    padding: 22px 4px;
+    display: flex; justify-content: space-between; align-items: center;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400;
+    color: var(--brown); cursor: pointer; gap: 16px; transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--rose); }
+  .faq-icon { font-size: 22px; font-weight: 300; color: var(--rose); flex-shrink: 0; transition: transform 0.3s ease; line-height: 1; }
+  .faq-q.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    display: none; padding: 0 4px 22px;
+    font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; max-width: 580px;
+  }
+  .faq-a strong { color: var(--brown); font-weight: 500; }
+  .faq-a.open { display: block; animation: fadeUp 0.3s ease forwards; }
+</style>
+
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pretty & Polished NC</div>
+  <a href="https://www.instagram.com/prettyandpolishednc" target="_blank">@prettyandpolishednc</a>
+  <p>© 2024 Pretty & Polished NC · Charlotte, NC</p>
+</footer>
+
+<script>
+  // ── State ──
+  const booking = {
+    service: '', servicePrice: 0,
+    tier: 'None', tierPrice: 0,
+    date: '', time: '',
+    paymentMethod: 'Zelle'
+  };
+
+  // ── Step Navigation ──
+  function goToStep(n) {
+    // Validate before leaving step 1
+    if (n === 2) {
+      const fn = document.getElementById('firstName').value.trim();
+      const ln = document.getElementById('lastName').value.trim();
+      const em = document.getElementById('email').value.trim();
+      if (!fn || !ln || !em) {
+        alert('Please fill in your name and email to continue.');
+        return;
+      }
+      if (!/\S+@\S+\.\S+/.test(em)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+    }
+
+    // Validate before leaving step 2
+    if (n === 3) {
+      if (!booking.service) { alert('Please select a service.'); return; }
+      const date = document.getElementById('apptDate').value;
+      const time = document.getElementById('apptTime').value;
+      if (!date) { alert('Please select a preferred date.'); return; }
+      if (!time) { alert('Please select a preferred time.'); return; }
+      booking.date = date;
+      booking.time = time;
+      updateSummary();
+    }
+
+    // Update dots
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot' + i);
+      dot.classList.remove('active', 'done');
+      if (i < n) dot.classList.add('done'), dot.textContent = '✓';
+      else if (i === n) dot.classList.add('active'), dot.textContent = i;
+      else dot.textContent = i;
+    }
+
+    // Show step
+    document.querySelectorAll('.booking-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+
+    // Summary bar
+    if (n >= 2) document.getElementById('summaryBar').classList.add('visible');
+    else document.getElementById('summaryBar').classList.remove('visible');
+
+    // Scroll
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Service Selection ──
+  function selectService(el, name, price) {
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    booking.service = name;
+    booking.servicePrice = price;
+    updateSummary();
+  }
+
+  // ── Tier Selection ──
+  function selectTier(el, name, price) {
+    document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    booking.tier = name;
+    booking.tierPrice = price;
+    updateSummary();
+  }
+
+  // ── Payment Method ──
+  function selectPayment(el) {
+    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+    el.classList.add('selected');
+    booking.paymentMethod = el.querySelector('.payment-method-name').textContent.replace(/[^a-zA-Z ]/g,'').trim();
+  }
+
+  // ── Summary ──
+  function updateSummary() {
+    const total = booking.servicePrice + booking.tierPrice;
+    const items = [];
+    if (booking.service) items.push(`<div class="summary-item">Service: <span>${booking.service}</span></div>`);
+    if (booking.tier && booking.tier !== 'None') items.push(`<div class="summary-item">Art: <span>${booking.tier}</span></div>`);
+    if (booking.date) {
+      const d = new Date(booking.date + 'T00:00:00');
+      const formatted = d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+      items.push(`<div class="summary-item">Date: <span>${formatted}</span></div>`);
+    }
+    if (booking.time) items.push(`<div class="summary-item">Time: <span>${booking.time}</span></div>`);
+    document.getElementById('summaryItems').innerHTML = items.join('');
+    document.getElementById('summaryTotal').textContent = total > 0 ? `$${total}` : '—';
+  }
+
+  // ── Submit ──
+  function submitBooking() {
+    if (!document.getElementById('depositConfirm').checked) {
+      alert('Please confirm that you have sent the $15 deposit to proceed.');
+      return;
+    }
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const dateVal = document.getElementById('apptDate').value;
+    const time = document.getElementById('apptTime').value;
+
+    const d = new Date(dateVal + 'T00:00:00');
+    const formattedDate = d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    const total = booking.servicePrice + booking.tierPrice;
+    const remaining = total - 15;
+
+    // Hide steps
+    document.getElementById('stepsIndicator').style.display = 'none';
+    document.querySelector('.steps-labels').style.display = 'none';
+    document.getElementById('summaryBar').style.display = 'none';
+    document.querySelectorAll('.booking-step').forEach(s => s.style.display = 'none');
+
+    // Fill confirm card
+    document.getElementById('confirmEmail').textContent = email;
+    document.getElementById('confirmCard').innerHTML = `
+      <div class="confirm-detail-label">Client Name</div>
+      <div class="confirm-detail-value">${firstName} ${lastName}</div>
+      <div class="confirm-detail-label">Service</div>
+      <div class="confirm-detail-value">${booking.service}${booking.tier !== 'None' ? ' + ' + booking.tier : ''}</div>
+      <div class="confirm-detail-label">Requested Date & Time</div>
+      <div class="confirm-detail-value">${formattedDate} at ${time}</div>
+      <div class="confirm-detail-label">Deposit Sent</div>
+      <div class="confirm-detail-value" style="color:#4caf50;">$15 ✓</div>
+      <div class="confirm-detail-label">Remaining Balance at Appointment</div>
+      <div class="confirm-detail-value">$${remaining}</div>
+    `;
+
+    document.getElementById('confirmation').classList.add('active');
+  }
+
+  // ── Set min date to today ──
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('apptDate').setAttribute('min', today);
+</script>
+</body>
+</html>
